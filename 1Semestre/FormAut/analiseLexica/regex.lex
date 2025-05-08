@@ -14,8 +14,8 @@ TYPE     (char|int|long|short|void)
 IDENTIFIER   [a-zA-Z_][a-zA-Z0-9_]*
 NUMBER       [0-9]+
 OPERATORS (\+|\-|\*|\/|%|\|\||&&|==|!=|<=|>=|<|>|!)
-SYMBOL (!|@|#|\$|%|\^|&|\*|\(|\)|\-|=|\+|\\|;)
-
+SYMBOL (!|@|#|\$|%|\^|&|\*|\-|=|\+|\\|;|\"|\')
+DELIMITER (\(|\)|\{|\}|\[|\])
 
 
 %%
@@ -26,7 +26,7 @@ SYMBOL (!|@|#|\$|%|\^|&|\*|\(|\)|\-|=|\+|\\|;)
 {NUMBER}  { printf("NUMBER: %s\n", yytext); }
 {OPERATORS}  { printf("OPERATORS: %s\n", yytext); }
 {SYMBOL}  { printf("SYMBOL: %s\n", yytext); }
-
+{DELIMITER}	{ printf("DELIMITER: %s\n", yytext); }
 
 
 [ \t\n]      { /* Ignorar espaÃ§os em branco */ }
