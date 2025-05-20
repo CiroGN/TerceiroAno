@@ -10,7 +10,9 @@ export default function Index() {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          // backgroundColor:"#fff",
+          flexWrap:"wrap",
+          flexDirection:"row",
+          gap:50,
         }}
         >
           <View style={{flexDirection:"row", alignItems:"center"}}>
