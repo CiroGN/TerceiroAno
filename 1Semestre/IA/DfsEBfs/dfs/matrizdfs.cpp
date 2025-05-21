@@ -30,8 +30,8 @@ bool dfs(int x, int y, int xf, int yf){
     if ( dfs(x, y-1, xf, yf) || // cima
         dfs(x-1, y, xf, yf) || // esquerda
         dfs(x, y+1, xf, yf) || // baixo
-        dfs(x+1, y, xf, yf) ){
-
+        dfs(x+1, y, xf, yf) ) // direitta
+        {
     	    matriz[x][y] = 2;
 	    imprime_matriz();
     	    return true;
@@ -95,11 +95,6 @@ int main(){
         cout << "Não há caminho!" << endl;
     }
 
-
-    imprime_matriz();
-
-
-	
+    imprime_matriz();	
 
 }
-
