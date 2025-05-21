@@ -37,7 +37,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <Text><Ionicons name="football" size={60} color="black" /></Text>
-      <Text style={styles.titulo}>Placar Eletronico</Text>
+      <Text style={styles.titulo}>Placar Eletrônico</Text>
       <Text style={styles.contador}>Time da Casa: {contador}</Text>
       <Text style={styles.contador}>Time Visitante: {contador2}</Text>
       <TouchableOpacity style={styles.botao} onPress={atualizarContagemCasa}>
