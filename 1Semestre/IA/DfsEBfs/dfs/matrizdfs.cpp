@@ -45,17 +45,16 @@ bool dfs(int x, int y, int xf, int yf){
 void imprime_matriz(){
     for(int i=0; i<C; i++){
         for(int j=0; j<L; j++){
-		if (matriz[i][j] == 2)
-			cout << "* ";
-            	else if (matriz[i][j] == 0)
-			cout << "  ";
-		else
-			cout << matriz[i][j] << " ";
+            if (matriz[i][j] == 2)
+                cout << "* ";
+            else if (matriz[i][j] == 0)
+                cout << "  ";
+            else
+                cout << matriz[i][j] << " ";
         }
         cout << endl;
     }
     cout << "-------------------------------\n";
-
 }
 
 

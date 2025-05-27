@@ -34,6 +34,7 @@ void marcar_caminho(int xi, int yi, int xf, int yf) {
         int py = pai_y[x][y];
         x = px;
         y = py;
+        imprime_matriz();
     }
     matriz[xi][yi] = 2; // marca o ponto de início também
 }
