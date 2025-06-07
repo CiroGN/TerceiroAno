@@ -1,5 +1,5 @@
 {
-  "name": "trailrats",
+  "name": "rotasetelas",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -37,7 +37,7 @@
     "react-native-screens": "~4.10.0",
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5",
-    "trailrats": "file:"
+    "rotasetelas": "file:"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
