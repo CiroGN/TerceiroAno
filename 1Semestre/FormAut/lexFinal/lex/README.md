@@ -23,13 +23,17 @@ Para compilar o projeto, basta rodar:
 make
 ```
 
+## Rodar
+
 Para rodar o projeto, basta rodar:
 
 ```bash
 make run
 ```
 
-Para excluir arquivos poscompilado, basta rodar:
+## Excluir para aplicar mudanças dos analizadores
+
+Para excluir arquivos poscompilados, basta rodar:
 
 ```bash
 make clean
