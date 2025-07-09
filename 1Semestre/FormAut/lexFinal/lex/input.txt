@@ -1,0 +1,14 @@
+int main() {
+    int a = 5;
+    int b = 10;
+    
+    if (a > 0 && b < 20 || a == 5) {
+        print("Condições lógicas funcionando!");
+    }
+    
+    if (a != b && !(a == 0)) {
+        print("Operadores de diferença e NOT funcionando");
+    }
+    
+    int mod = b % a;
+}
