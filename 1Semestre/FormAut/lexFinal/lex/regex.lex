@@ -16,6 +16,9 @@ TYPE        (char|int|long|short|void)
 VARIABLE    [a-zA-Z_][a-zA-Z0-9_]*
 NUMBER      [0-9]+
 STRING      \"([^\\\"]|\\.)*\"
+CHARCONST    \'([^\\\']|\\.)\'
+
+
 
 %%
 
@@ -39,6 +42,10 @@ STRING      \"([^\\\"]|\\.)*\"
 "*"         { return TIMES; }
 "/"         { return DIVIDE; }
 "%"         { return MOD; }
+"["         { return LBRACKET; }
+"]"         { return RBRACKET; }
+","         { return COMMA; }
+
 
 "if"        { return IF; }
 "else"      { return ELSE; }
@@ -56,6 +63,7 @@ STRING      \"([^\\\"]|\\.)*\"
 {VARIABLE}  { yylval.str = strdup(yytext); return VARIABLE; }
 {NUMBER}    { yylval.num = atoi(yytext); return NUMBER; }
 {STRING}    { yylval.str = strdup(yytext); return STRING; }
+{CHARCONST}  { yylval.str = strdup(yytext); return STRING; } 
 
 [ \t]+      { /* ignora espaços */ }
 \n          { lineno++; }

@@ -23,6 +23,8 @@ int debug = 1;
 %token LESS GREATER LESSEQ GREATEREQ EQUALTO NOTEQUAL
 %token AND OR NOT
 %token PLUS MINUS TIMES DIVIDE MOD
+%token LBRACKET RBRACKET COMMA
+
 
 /* Precedências */
 %left OR
@@ -45,9 +47,24 @@ program:
     ;
 
 function:
-    TYPE VARIABLE LPAREN RPAREN LBRACE statements RBRACE
-    { if (debug) printf("Função %s reconhecida\n", $2); }
+    TYPE VARIABLE LPAREN argument_list RPAREN LBRACE statements RBRACE
+    {
+        if (debug) {
+            printf("Função %s com argumentos reconhecida\n", $2);
+        }
+    }
     ;
+
+argument_list:
+    /* vazio */
+    | argument_declaration
+    | argument_list COMMA argument_declaration
+    ;
+
+argument_declaration:
+    TYPE VARIABLE
+    ;
+
 
 statements:
     /* vazio */
@@ -56,25 +73,38 @@ statements:
 
 statement:
     declaration SEMICOLON
-    | if_statement
-    | print_statement SEMICOLON
-    | block
-    | for_statement
-    | while_statement
-    | expression SEMICOLON
     | assignment SEMICOLON
+    | expression SEMICOLON
+    | if_statement
+    | while_statement
+    | for_statement
+    | print_statement SEMICOLON
+    | return_statement
+    | block
     ;
 
 declaration:
     TYPE VARIABLE EQUAL expression
+    {
+        if (debug) {
+            printf("Regex: /%s/ → [tipo de dado] (linha %d)\n", $1, lineno);
+            printf("Regex: /%s/ → [declaração de variável] (linha %d)\n", $2, lineno);
+        }
+    }
     ;
 
 assignment:
     VARIABLE EQUAL expression
+    {
+        if (debug) {
+            printf("Regex: /%s/ → [atribuição de variável] (linha %d)\n", $1, lineno);
+        }
+    }
     ;
 
-condition:
+expression:
     logical_expression
+    | additive_expression
     ;
 
 logical_expression:
@@ -110,24 +140,61 @@ multiplicative_expression:
 primary_expression:
     VARIABLE
     | NUMBER
-    | LPAREN additive_expression RPAREN  /* Alteração crucial aqui */
-    ;
-
-expression:
-    logical_expression
-    | additive_expression
+    | LPAREN additive_expression RPAREN
     ;
 
 print_statement:
     PRINT LPAREN STRING RPAREN
+    {
+        if (debug) {
+            printf("Regex: /print/ → [comando de saída] (linha %d)\n", lineno);
+            printf("Regex: %s → [mensagem a ser exibida] (linha %d)\n", $3, lineno);
+        }
+    }
+    ;
+
+return_statement:
+    RETURN expression SEMICOLON
+    {
+        if (debug) printf("Regex: /return/ → [retorno de função] (linha %d)\n", lineno);
+    }
     ;
 
 block:
     LBRACE statements RBRACE
     ;
 
+if_statement:
+    IF LPAREN condition RPAREN statement %prec LOWER_THAN_ELSE
+    {
+        if (debug) printf("Regex: /if/ → [condição] (linha %d)\n", lineno);
+    }
+    | IF LPAREN condition RPAREN statement ELSE statement
+    {
+        if (debug) {
+            printf("Regex: /if/ → [condição] (linha %d)\n", lineno);
+            printf("Regex: /else/ → [alternativa] (linha %d)\n", lineno);
+        }
+    }
+    ;
+
+
+condition:
+    logical_expression
+    ;
+
+while_statement:
+    WHILE LPAREN condition RPAREN statement
+    {
+        if (debug) printf("Regex: /while/ → [laço de repetição] (linha %d)\n", lineno);
+    }
+    ;
+
 for_statement:
     FOR LPAREN for_init SEMICOLON condition SEMICOLON for_step RPAREN statement
+    {
+        if (debug) printf("Regex: /for/ → [laço de repetição] (linha %d)\n", lineno);
+    }
     ;
 
 for_init:
@@ -140,15 +207,6 @@ for_step:
     expression
     | assignment
     | /* vazio */
-    ;
-
-while_statement:
-    WHILE LPAREN condition RPAREN statement
-    ;
-
-if_statement:
-    IF LPAREN condition RPAREN statement %prec LOWER_THAN_ELSE
-    | IF LPAREN condition RPAREN statement ELSE statement
     ;
 
 %%
