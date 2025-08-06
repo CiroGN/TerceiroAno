@@ -1,50 +1,162 @@
-# Welcome to your Expo app 👋
+# TrailRats - Aplicativo de Trilhas
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+TrailRats é um aplicativo desenvolvido com **React Native** e **Python (Flask)** que permite aos usuários:
 
-## Get started
+* Cadastrar e explorar trilhas com informações detalhadas.
+* Adicionar fotos às trilhas.
+* Visualizar um feed de trilhas com imagens de capa.
+* Acessar detalhes completos da trilha e do autor.
 
-1. Install dependencies
+> Este projeto foi feito para fins educacionais, com foco em desenvolvimento fullstack mobile + backend.
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 🚀 Tecnologias Utilizadas
 
-   ```bash
-   npx expo start
-   ```
+### Frontend:
 
-In the output, you'll find options to open the app in a
+* React Native com Expo
+* AsyncStorage (para persistência de sessão)
+* React Navigation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Backend:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+* Flask
+* MySQL
+* JWT para autenticação
+* Upload de imagens com `werkzeug`
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 📂 Estrutura do Projeto
 
-```bash
-npm run reset-project
+```
+TrailRats/
+├── backend/
+│   ├── app.py
+│   ├── db.py
+│   ├── routes/
+│   │   ├── login.py
+│   │   ├── trail.py
+│   │   ├── upload_image.py
+│   │   ├── feed.py
+│   │   └── trail_details.py
+│   └── uploads/         # Pasta com imagens salvas
+├── frontend/
+│   ├── screens/
+│   │   ├── LoginScreen.tsx
+│   │   ├── TrailFormScreen1.tsx
+│   │   ├── AdicionarFotosScreen.tsx
+│   │   ├── FeedScreen.tsx
+│   │   └── TrailDetailsScreen.tsx
+│   └── assets/
+│       └── images/
+├── .env
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 📅 Configuração do Ambiente
 
-To learn more about developing your project with Expo, look at the following resources:
+### 1. Crie o arquivo `.env` na raiz do backend:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=sua_senha
+DB_NAME=trailrats_db
+SECRET_KEY=sua_chave_ultra_secreta
+```
 
-## Join the community
+### 2. Instale as dependências do backend:
 
-Join our community of developers creating universal apps.
+```bash
+cd backend
+pip install -r requirements.txt
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 3. Crie as tabelas do banco de dados MySQL (usando MySQL Workbench ou similar):
+
+```sql
+CREATE DATABASE trailrats_db;
+USE trailrats_db;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  password TEXT NOT NULL
+);
+
+CREATE TABLE trails (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  nome VARCHAR(255),
+  dificuldade INT,
+  perigo INT,
+  distancia VARCHAR(50),
+  tempo VARCHAR(50),
+  assistencia BOOLEAN,
+  precisa_guia BOOLEAN,
+  idosos BOOLEAN,
+  criancas BOOLEAN,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE images (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  trail_id INT NOT NULL,
+  image_url TEXT NOT NULL,
+  data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (trail_id) REFERENCES trails(id) ON DELETE CASCADE
+);
+```
+
+---
+
+## 🚀 Como Rodar Localmente
+
+### Backend (Flask)
+
+```bash
+cd backend
+python app.py
+```
+
+### Frontend (React Native)
+
+```bash
+cd frontend
+npx expo start
+```
+
+Certifique-se de ajustar o IP no `API_URL` para o IP local da sua máquina na rede (ex: `192.168.X.X`).
+
+---
+
+## 🧵 Funcionalidades
+
+* [x] Login com criptografia de senha
+* [x] Cadastro de trilhas
+* [x] Upload de múltiplas imagens por trilha (armazenadas em pastas por ID)
+* [x] Visualização de feed com imagens de capa e detalhes
+* [x] Expansão da trilha para ver detalhes e galeria
+
+---
+
+## 📊 Melhorias Futuras
+
+* [ ] Edição de perfil
+* [ ] Curtidas ou comentários em trilhas
+* [ ] Geolocalização e mapa de trilha
+* [ ] Upload para nuvem (ex: S3) ao invés de armazenamento local
+
+---
+
+## 🌟 Agradecimentos
+
+- [Marjorie Ap. Cortez Daenecke](https://github.com/MarjorieDaenecke) – pela colaboração e apoio durante o desenvolvimento do projeto.
+
+---
+
+**Licença**: Livre para fins educacionais e pessoais.
