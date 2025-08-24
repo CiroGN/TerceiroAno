@@ -1,6 +1,6 @@
 import pyomo.environ as Pyo
 
-EXEC_PATH = "C:\Users\cirog\glpk-5.0\glpsol"
+EXEC_PATH = "C:\glpk-4.65\w64\glpsol.exe"
 
 Modelo = Pyo.ConcreteModel()
 
