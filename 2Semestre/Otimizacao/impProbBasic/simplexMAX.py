@@ -50,7 +50,7 @@ def metodoSimplex(c, A, b, VD):
     Tableau.append(linhaFO)
 
     # Nomeando as variaveis de folga
-    Folgas = [f's{i+1}' for i in range(m)]
+    Folgas = [f'w{i+1}' for i in range(m)]
     VDFolgas = VD + Folgas
     Base = Folgas[:]
 
