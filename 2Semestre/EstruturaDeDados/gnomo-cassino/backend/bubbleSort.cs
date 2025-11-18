@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using cartas;
 // Representa um passo do algoritmo
 public class BubbleStep
 {
@@ -15,41 +15,23 @@ public class BubbleSortEducacional
     public List<BubbleStep> Passos { get; private set; } = new List<BubbleStep>();
 
     // Executa o bubble sort registrando cada passo
-    public int[] OrdenarComPassos(int[] arrayOriginal)
+    void BubbleSortBySerial(List<Carta> cards)
+{
+    int n = cards.Count;
+    for (int i = 0; i < n - 1; i++)
     {
-        int[] arr = (int[])arrayOriginal.Clone();
-        int n = arr.Length;
-
-        Passos.Clear();
-
-        for (int i = 0; i < n - 1; i++)
+        for (int j = 0; j < n - 1 - i; j++)
         {
-            for (int j = 0; j < n - i - 1; j++)
+            if (cards[j].Serial > cards[j + 1].Serial)
             {
-                bool troca = false;
-
-                // Se A > B troca
-                if (arr[j] > arr[j + 1])
-                {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                    troca = true;
-                }
-
-                // Grava o passo atual
-                Passos.Add(new BubbleStep
-                {
-                    IndexA = j,
-                    IndexB = j + 1,
-                    HouveTroca = troca,
-                    EstadoAtual = (int[])arr.Clone()
-                });
+                // swap objects
+                var tmp = cards[j];
+                cards[j] = cards[j + 1];
+                cards[j + 1] = tmp;
             }
         }
-
-        return arr;
     }
+}
 
     // Valida se o movimento do jogador corresponde ao passo correto
     public bool VerificarMovimento(int passo, int indexA, int indexB, bool jogadorTrocou)
@@ -75,10 +57,17 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        int[] arr = { 5, 3, 8, 1, 4 };
-
+// create deck with serials 1..31
+        List<Carta> deck = new List<Carta>();
+        string[] naipes = { "Copas", "Paus", "Ouros", "Espadas" };
+        for (int i = 1; i <= 31; i++)
+        {
+            string naipe = naipes[(i - 1) % naipes.Length];
+            string valor = (i % 11 == 0) ? "K" : (i % 10 == 0) ? "J" : (i % 9 == 0) ? "Q" : i.ToString(); // example
+            deck.Add(new Carta(naipe, valor, i));
+        }
         BubbleSortEducacional bubble = new BubbleSortEducacional();
-        bubble.OrdenarComPassos(arr);
+        bubble.BubbleSortBySerial(deck);
 
         Console.WriteLine("Passos registrados:");
         int i = 0;
