@@ -1,3 +1,4 @@
+namespace backend;
 public class Carta
 {
     public string Naipe { get; set; }
@@ -9,5 +10,8 @@ public class Carta
         Naipe = naipe;
         Valor = valor;
         Serial = serial;
+    }
+    public Carta()
+    {
     }
 }
