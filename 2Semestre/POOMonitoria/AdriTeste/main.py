@@ -156,7 +156,7 @@ def menu_consulta_inicio():
 
 
 
-def menu_consulta(consultas, agendas, medicos, pacientes):
+def menu_consulta(consultas, medicos, pacientes, agendas):
     j = ""
     while j != "0":
         menu_consulta_inicio()
