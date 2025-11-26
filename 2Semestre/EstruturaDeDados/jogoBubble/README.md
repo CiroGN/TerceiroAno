@@ -32,11 +32,11 @@ O jogo implementa uma experiência interativa onde o jogador aprende na prática
 
 ### Participantes do Grupo
 
-- Ciro Guilherme Nass
-- Nicolas Lourenço dos Santos
-- Miguel Martins Costa
-- Luan Mickael da Rocha
 - Alexandre Raphael Marques de Freitas
+- Ciro Guilherme Nass
+- Luan Mickael da Rocha
+- Miguel Martins Costa
+- Nicolas Lourenço dos Santos
 
 
 
@@ -376,7 +376,7 @@ npm test
 
 ### Reportar Bugs
 
-Se encontrar um bug, abra uma [Issue no GitHub](https://github.com/seu-usuario/bubble-sort-game/issues).
+Se encontrar um bug, abra uma [Issue no GitHub](https://github.com/cirogn/TerceiroAno/issues).
 
 ---
 
