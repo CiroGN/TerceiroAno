@@ -11,24 +11,34 @@ Um jogo educativo interativo para aprender o algoritmo de ordenação Bubble Sor
 
 ## 📋 Índice
 
-- [Visão Geral](#visão-geral)
-- [Características](#características)
-- [Como Jogar](#como-jogar)
-- [Tecnologias](#tecnologias)
-- [Instalação](#instalação)
-- [Como Usar](#como-usar)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Documentação](#documentação)
-- [Contribuindo](#contribuindo)
-- [Créditos](#créditos)
+- [Visão Geral](#-visão-geral)
+- [Características](#-características)
+- [Como Jogar](#-como-jogar)
+- [Tecnologias](#-tecnologias)
+- [Instalação](#-instalação)
+- [Como Usar](#-como-usar)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Documentação](#-documentação)
+- [Contribuindo](#-contribuindo)
+- [Créditos](#-créditos)
 
 ---
 
 ## 🎯 Visão Geral
 
-Este projeto é um **jogo educativo** desenvolvido para a disciplina de **Estrutura de Dados** do IFPR (Instituto Federal do Paraná), turma BCC-3, sob orientação do Prof. Marcelo Maia.
+Este projeto é um **jogo educativo** desenvolvido para a disciplina de **Estrutura de Dados** do IFPR (Instituto Federal do Paraná), turma BCC-3.
 
 O jogo implementa uma experiência interativa onde o jogador aprende na prática como o algoritmo Bubble Sort funciona, ordenando elementos e validando seus passos em tempo real.
+
+### Participantes do Grupo
+
+- Ciro Guilherme Nass
+- Nicolas Lourenço dos Santos
+- Miguel Martins Costa
+- Luan Mickael da Rocha
+- Alexandre Raphael Marques de Freitas
+
+
 
 ### Por que um jogo?
 
