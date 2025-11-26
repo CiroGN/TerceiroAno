@@ -123,7 +123,7 @@ O jogo implementa uma experiência interativa onde o jogador aprende na prática
 
 ### Opção 1: Jogar Online (Recomendado)
 
-Simplesmente acesse: **[https://cirogn.github.io/jogoBubble/src/](https://cirogn.github.io/jogoBubble/src)**
+Simplesmente acesse: **[https://cirogn.github.io/jogoBubble/src](https://cirogn.github.io/jogoBubble/src)**
 
 ### Opção 2: Rodar Localmente
 
