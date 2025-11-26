@@ -11,16 +11,16 @@ Um jogo educativo interativo para aprender o algoritmo de ordenação Bubble Sor
 
 ## 📋 Índice
 
-- [Visão Geral](##visão-geral)
-- [Características](##características)
-- [Como Jogar](#como-jogar)
-- [Tecnologias](#tecnologias)
-- [Instalação](#instalação)
-- [Como Usar](#como-usar)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Documentação](#documentação)
-- [Contribuindo](#contribuindo)
-- [Créditos](#créditos)
+- [Visão Geral](#-visão-geral)
+- [Características](#-características)
+- [Como Jogar](#-como-jogar)
+- [Tecnologias](#-tecnologias)
+- [Instalação](#-instalação)
+- [Como Usar](#-como-usar)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Documentação](#-documentação)
+- [Contribuindo](#-contribuindo)
+- [Créditos](#-créditos)
 
 ---
 
