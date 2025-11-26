@@ -15,6 +15,8 @@ class SolucionadorSimplex:
         self.variaveis_livres = set()
         self.tipo_otimizacao = 'MAX'
         self.restricoes = []
+        self.factivel = True  # Nova variável para rastrear factibilidade
+        self.saida_arquivo = None  # Para armazenar o conteúdo da saída
 
     def _dividir_variaveis_livres(self, coeficientes):
         novos = {}
@@ -46,6 +48,28 @@ class SolucionadorSimplex:
             else:
                 coef[var] = valor
         return coef
+
+    def _adicionar_saida(self, texto):
+        """Adiciona texto à saída que será salva no arquivo"""
+        if self.saida_arquivo is None:
+            self.saida_arquivo = []
+        self.saida_arquivo.append(texto)
+        print(texto)
+
+    def _salvar_saida_arquivo(self, nome_arquivo_entrada):
+        """Salva a saída em um arquivo TXT"""
+        if self.saida_arquivo is None:
+            return
+        
+        # Cria nome do arquivo de saída baseado no arquivo de entrada
+        nome_base = os.path.splitext(nome_arquivo_entrada)[0]
+        nome_arquivo_saida = f"{nome_base}_solucao.txt"
+        
+        with open(nome_arquivo_saida, 'w', encoding='utf-8') as f:
+            for linha in self.saida_arquivo:
+                f.write(linha + '\n')
+        
+        print(f"\n>>> Saída salva em: {nome_arquivo_saida}")
 
     def carregar_arquivo(self, nome_arquivo):
         with open(nome_arquivo, 'r') as f:
@@ -185,18 +209,34 @@ class SolucionadorSimplex:
 
     def mostrar_tableau(self, iteracao):
         if iteracao < 2:
-            print(f"\n--- Iteracao {iteracao} ---")
+            self._adicionar_saida(f"\n--- Iteracao {iteracao} ---")
             cab = " | ".join([f"{h:>7}" for h in self.cabecalhos])
-            print(cab)
-            print("-" * len(cab))
+            self._adicionar_saida(cab)
+            self._adicionar_saida("-" * len(cab))
             rotulos = [' Z'] + [f"{b:>2}" for b in self.variaveis_basicas]
             for i, linha in enumerate(self.tableau):
                 linha_str = " | ".join([f"{val:>7.1f}" for val in linha])
                 rot = rotulos[i] if i < len(rotulos) else f"L{i}"
-                print(f"{rot:<3} | {linha_str}")
+                self._adicionar_saida(f"{rot:<3} | {linha_str}")
 
-    def resolver(self):
-        print(f"\n>>> Resolvendo problema de {self.tipo_otimizacao} <<<")
+    def verificar_factibilidade(self):
+        """Verifica se o problema é factível analisando variáveis artificiais na solução"""
+        # Verifica se há variáveis artificiais na base com valor positivo
+        for i, var_basica in enumerate(self.variaveis_basicas):
+            if var_basica.startswith('a'):  # É uma variável artificial
+                valor = self.tableau[i+1][-1]  # +1 porque a linha 0 é a função objetivo
+                if abs(valor) > 1e-7:  # Variável artificial com valor significativo
+                    return False
+        
+        # Verifica se o valor da FO é muito grande (indicando problema infactível)
+        valor_z = abs(self.tableau[0][-1])
+        if valor_z > self.M / 10:  # Se o valor Z é muito grande, provavelmente é infactível
+            return False
+            
+        return True
+
+    def resolver(self, nome_arquivo_entrada):
+        self._adicionar_saida(f"\n>>> Resolvendo problema de {self.tipo_otimizacao} <<<")
         it = 0
         self.mostrar_tableau(it)
         max_it = 5000
@@ -222,7 +262,9 @@ class SolucionadorSimplex:
                         menor_ratio = ratio
                         linha_pivo = i
             if linha_pivo == -1:
-                print("\n>>> Problema ilimitado! <<<")
+                self._adicionar_saida("\n>>> Problema ilimitado! <<<")
+                self.factivel = True  # Problemas ilimitados são tecnicamente factíveis
+                self._salvar_saida_arquivo(nome_arquivo_entrada)
                 return
             self.variaveis_basicas[linha_pivo - 1] = self.cabecalhos[coluna_pivo]
             pivo = self.tableau[linha_pivo][coluna_pivo]
@@ -235,12 +277,22 @@ class SolucionadorSimplex:
                         self.tableau[i][j] -= fator * self.tableau[linha_pivo][j]
             it += 1
             if it % 100 == 0:
-                print(f"Iteracao {it}...")
-        print("\nSolução\n")
+                self._adicionar_saida(f"Iteracao {it}...")
+        
+        # Verificar factibilidade após resolver
+        self.factivel = self.verificar_factibilidade()
+        
+        if not self.factivel:
+            self._adicionar_saida("\n>>> Problema INFACTÍVEL! <<<")
+            self._adicionar_saida("Não existe solução que satisfaça todas as restrições simultaneamente.")
+            self._salvar_saida_arquivo(nome_arquivo_entrada)
+            return
+        
+        self._adicionar_saida("\nSolução\n")
         valor_z = self.tableau[0][-1]
         if self.tipo_otimizacao == 'MIN':
             valor_z = -valor_z
-        print(f"FO: {valor_z:.1f}")
+        self._adicionar_saida(f"FO: {valor_z:.1f}")
         valores_raw = {}
         for i in range(1, self.num_linhas):
             nome_bas = self.variaveis_basicas[i-1]
@@ -267,8 +319,8 @@ class SolucionadorSimplex:
             valores_reais[nome] = val_real
             if abs(val_real) < 1e-9:
                 val_real = 0.0
-            print(f"{nome} = {val_real:.1f}")
-        print()
+            self._adicionar_saida(f"{nome} = {val_real:.1f}")
+        self._adicionar_saida("")
         for i, restr in enumerate(self.restricoes):
             soma_lhs = 0.0
             for var_tab, coef in restr['coef'].items():
@@ -280,14 +332,31 @@ class SolucionadorSimplex:
             if abs(soma_lhs) < 1e-9:
                 soma_lhs = 0.0
             if op == '<=':
-                print(f"{nome_r} = None <= {soma_lhs:.1f} <= {rhs:.1f}")
+                self._adicionar_saida(f"{nome_r} = None <= {soma_lhs:.1f} <= {rhs:.1f}")
             elif op == '>=':
-                print(f"{nome_r} = {rhs:.1f} <= {soma_lhs:.1f} <= None")
+                self._adicionar_saida(f"{nome_r} = {rhs:.1f} <= {soma_lhs:.1f} <= None")
             elif op == '=':
-                print(f"{nome_r} = {rhs:.1f} <= {soma_lhs:.1f} <= {rhs:.1f}")
+                self._adicionar_saida(f"{nome_r} = {rhs:.1f} <= {soma_lhs:.1f} <= {rhs:.1f}")
+        
+        # Mostrar status final
+        status = self.obter_status()
+        self._adicionar_saida(f"\nStatus: {status}")
+        
+        # Salvar arquivo de saída
+        self._salvar_saida_arquivo(nome_arquivo_entrada)
+
+    def obter_status(self):
+        """Retorna o status da solução"""
+        if not self.factivel:
+            return "INFACTÍVEL"
+        # Verificar se encontrou solução ótima
+        for j in range(self.num_colunas):
+            if self.tableau[0][j] < -1e-7:
+                return "NÃO RESOLVIDO"
+        return "ÓTIMO"
 
 if __name__ == "__main__":
-    arquivo = "exemplo2.txt"
+    arquivo = "exemplo.txt"
     solver = SolucionadorSimplex()
     solver.carregar_arquivo(arquivo)
-    solver.resolver()
+    solver.resolver(arquivo)
