@@ -5,7 +5,7 @@ Um jogo educativo interativo para aprender o algoritmo de ordenação Bubble Sor
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 ![Language](https://img.shields.io/badge/Language-JavaScript-yellow)
 ![License](https://img.shields.io/badge/License-MIT-blue)
-![IFPR](https://img.shields.io/badge/IFPR-BCC--3-purple)
+![IFPR](https://img.shields.io/badge/IFPR-BCC--2-purple)
 
 ---
 
@@ -26,17 +26,17 @@ Um jogo educativo interativo para aprender o algoritmo de ordenação Bubble Sor
 
 ## 🎯 Visão Geral
 
-Este projeto é um **jogo educativo** desenvolvido para a disciplina de **Estrutura de Dados** do IFPR (Instituto Federal do Paraná), turma BCC-3.
+Este projeto é um **jogo educativo** desenvolvido para a disciplina de **Estrutura de Dados** do IFPR (Instituto Federal do Paraná), turma BCC-2.
 
 O jogo implementa uma experiência interativa onde o jogador aprende na prática como o algoritmo Bubble Sort funciona, ordenando elementos e validando seus passos em tempo real.
 
 ### Participantes do Grupo
 
-- Ciro Guilherme Nass
-- Nicolas Lourenço dos Santos
-- Miguel Martins Costa
-- Luan Mickael da Rocha
 - Alexandre Raphael Marques de Freitas
+- Ciro Guilherme Nass
+- Luan Mickael da Rocha
+- Miguel Martins Costa
+- Nicolas Lourenço dos Santos
 
 
 
@@ -123,7 +123,7 @@ O jogo implementa uma experiência interativa onde o jogador aprende na prática
 
 ### Opção 1: Jogar Online (Recomendado)
 
-Simplesmente acesse: **[https://cirogn.github.io/jogoBubble/src/](https://cirogn.github.io/jogoBubble/src)**
+Simplesmente acesse: **[https://cirogn.github.io/jogoBubble/src](https://cirogn.github.io/jogoBubble/src)**
 
 ### Opção 2: Rodar Localmente
 
@@ -376,7 +376,7 @@ npm test
 
 ### Reportar Bugs
 
-Se encontrar um bug, abra uma [Issue no GitHub](https://github.com/seu-usuario/bubble-sort-game/issues).
+Se encontrar um bug, abra uma [Issue no GitHub](https://github.com/cirogn/TerceiroAno/issues).
 
 ---
 
@@ -436,7 +436,7 @@ Contribuições são bem-vindas! Para contribuir:
 - **Instituição:** Instituto Federal do Paraná (IFPR)
 - **Disciplina:** Estrutura de Dados
 - **Professor:** Marcelo Maia
-- **Turma:** BCC-3
+- **Turma:** BCC-2
 - **Período:** Novembro 2025
 
 ### Referências
