@@ -5,7 +5,7 @@ Um jogo educativo interativo para aprender o algoritmo de ordenação Bubble Sor
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 ![Language](https://img.shields.io/badge/Language-JavaScript-yellow)
 ![License](https://img.shields.io/badge/License-MIT-blue)
-![IFPR](https://img.shields.io/badge/IFPR-BCC--3-purple)
+![IFPR](https://img.shields.io/badge/IFPR-BCC--2-purple)
 
 ---
 
@@ -26,7 +26,7 @@ Um jogo educativo interativo para aprender o algoritmo de ordenação Bubble Sor
 
 ## 🎯 Visão Geral
 
-Este projeto é um **jogo educativo** desenvolvido para a disciplina de **Estrutura de Dados** do IFPR (Instituto Federal do Paraná), turma BCC-3.
+Este projeto é um **jogo educativo** desenvolvido para a disciplina de **Estrutura de Dados** do IFPR (Instituto Federal do Paraná), turma BCC-2.
 
 O jogo implementa uma experiência interativa onde o jogador aprende na prática como o algoritmo Bubble Sort funciona, ordenando elementos e validando seus passos em tempo real.
 
@@ -436,7 +436,7 @@ Contribuições são bem-vindas! Para contribuir:
 - **Instituição:** Instituto Federal do Paraná (IFPR)
 - **Disciplina:** Estrutura de Dados
 - **Professor:** Marcelo Maia
-- **Turma:** BCC-3
+- **Turma:** BCC-2
 - **Período:** Novembro 2025
 
 ### Referências
