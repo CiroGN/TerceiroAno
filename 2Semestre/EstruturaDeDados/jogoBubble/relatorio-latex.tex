@@ -1,5 +1,5 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage[utf-8]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[portuguese]{babel}
 \usepackage[top=2.5cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
 \usepackage{graphicx}
@@ -13,7 +13,6 @@
 \usepackage{booktabs}
 \usepackage{float}
 \usepackage{tikz}
-\usepackage{tikzstyle}
 
 % Configuração de código
 \lstset{
@@ -46,8 +45,9 @@
 \definecolor{darkblue}{RGB}{0,51,102}
 \definecolor{lightblue}{RGB}{200,220,255}
 
-\title{\textcolor{darkblue}{\textbf{JOGO EDUCATIVO DE ORDENAÇÃO}\\[0.5cm]\large Bubble Sort: Um Aplicativo Interativo para Aprendizagem de Algoritmos}}
-\author{Instituto Federal do Paraná - IFPR\\Curso: Bacharelado em Ciência da Computação\\Disciplina: Estrutura de Dados\\Professor: Marcelo Maia\\Turma: BCC-3}
+\title{\textcolor{darkblue}{\textbf{JOGO EDUCATIVO DE ORDENAÇÃO}\\[0.5cm]}}
+
+\author{\textbf{Instituto Federal do Paraná - IFPR} \\ Alexandre Raphael Marques De Freitas \\ Ciro Guilherme Nass \\ Luan Mickael da Rocha \\ Miguel Martins Costa \\ Nicolas Lourenço Dos Santos\\\\Curso: Bacharelado em Ciência da Computação\\Disciplina: Estrutura de Dados\\Professor: Marcelo Maia\\Turma: BCC-3}
 \date{Novembro de 2025}
 
 \begin{document}
@@ -82,7 +82,7 @@ O jogo implementa um sistema de validação de passos que verifica se o jogador 
 
 \subsection{Contextualização}
 
-A compreensão de algoritmos de ordenação é fundamental para a formação de um cientista da computação. Porém, o aprendizado teórico frequentemente carece de engagement do aluno. Métodos tradicionais, como aulas expositivas e listas de exercícios, nem sempre são suficientes para manter o interesse e promover aprendizagem profunda.
+A compreensão de algoritmos de ordenação é fundamental para a formação de um cientista da computação. Porém, o aprendizado teórico frequentemente carece do engajamento do aluno. Métodos tradicionais, como aulas expositivas e listas de exercícios, nem sempre são suficientes para manter o interesse e promover aprendizagem profunda.
 
 A gamificação de conceitos educacionais é uma estratégia comprovadamente eficaz para aumentar engajamento e retenção de conhecimento. Este projeto explora essa abordagem ao criar um jogo interativo onde o aluno não apenas observa o algoritmo em funcionamento, mas participa ativamente de sua execução.
 
@@ -97,7 +97,6 @@ Desenvolver um aplicativo educativo web-based que permita aos alunos da discipli
     \item Fornecer feedback visual e de texto em tempo real
     \item Criar interface amigável e intuitiva que promova engajamento
     \item Facilitar expansão futura para outros algoritmos de ordenação
-    \item Disponibilizar o aplicativo de forma acessível (GitHub Pages) para uso pela instituição
 \end{itemize}
 
 % Seção 2
@@ -126,7 +125,6 @@ Para i = 0 até n-1:
         \hline
         Complexidade Temporal (pior caso) & $O(n^2)$ \\
         Complexidade Temporal (melhor caso) & $O(n)$ \\
-        Complexidade Espacial & $O(1)$ \\
         Estável & Sim \\
         In-place & Sim \\
         \hline
@@ -195,32 +193,15 @@ Arrays foram escolhidos porque:
 % Seção 4
 \section{Decisões Técnicas}
 
-\subsection{Linguagem e Tecnologias}
-
-\subsubsection{Por que HTML5, CSS3 e JavaScript?}
-
-O projeto foi inicialmente especificado em C, linguagem de baixo nível que ofereceria controle total da memória e desempenho otimizado. Porém, foram avaliadas alternativas.
-
-\textbf{Justificativa da escolha:}
-
-O objetivo pedagógico de um jogo educativo é \textbf{maximizar engajamento e compreensão}. Uma interface visual rica contribui significativamente para isso. Adicionalmente:
-
-\begin{enumerate}
-    \item \textbf{Acessibilidade:} Qualquer pessoa com um navegador pode usar
-    \item \textbf{Prototipagem Rápida:} Iterações e melhorias são ágeis
-    \item \textbf{Escalabilidade:} Fácil adicionar novos algoritmos
-    \item \textbf{Portabilidade:} Funciona em Windows, macOS, Linux, mobile
-    \item \textbf{Frontend Puro:} Não requer infraestrutura de servidor
-\end{enumerate}
 
 \subsection{Estrutura do Projeto}
 
 \begin{verbatim}
 bubble-sort-game/
-├── index.html        # Estrutura HTML e layout
-├── style.css         # Estilos e tema visual
-├── script.js         # Lógica do jogo
-└── README.md         # Documentação
+- index.html        # Estrutura HTML e layout
+- style.css         # Estilos e tema visual
+- script.js         # Lógica do jogo
+- README.md         # Documentação
 \end{verbatim}
 
 \textbf{Vantagem do arquivo único:} Facilita distribuição e hospedagem em GitHub Pages.
@@ -369,28 +350,6 @@ function generateQuickSortSteps(array) {
     \item \textbf{Modo Automático:} Ver algoritmo resolver antes de jogar
     \item \textbf{Análise Detalhada:} Gráficos de comparações e trocas
     \item \textbf{Suporte a Mobile:} Toque em vez de clique
-\end{itemize}
-
-% Seção 8
-\section{Distribuição e Hospedagem}
-
-\subsection{GitHub Pages}
-
-\textbf{Passo a passo:}
-
-\begin{enumerate}
-    \item Criar repositório no GitHub
-    \item Ativar GitHub Pages nas configurações
-    \item Fazer push dos arquivos
-    \item Acessar via \texttt{https://usuario.github.io/bubble-sort-game}
-\end{enumerate}
-
-\textbf{Vantagens:}
-\begin{itemize}
-    \item Hospedagem gratuita
-    \item Sem necessidade de servidor
-    \item Atualizações via git push
-    \item Acessível globalmente
 \end{itemize}
 
 % Seção 9
