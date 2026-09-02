@@ -1,0 +1,4 @@
+[submodule "1Semestre/IoT/Esp32Iot"]
+	path = 1Semestre/IoT/Esp32Iot
+	url = https://github.com/CiroGN/Esp32Iot.git
+	branch = main
